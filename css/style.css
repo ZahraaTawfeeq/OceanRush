@@ -1,0 +1,50 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Bubbles&display=swap'); */
+/* font-family: "Rubik Bubbles", system-ui; */
+/* font-family: "Bubblegum Sans", sans-serif; */
+/* font-family: "Chelsea Market", system-ui; */
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+body {
+    font-family: "Bungee", sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #041C4D;
+}
+
+#container {
+    display: flex;
+    width: 60%;
+    height: 90vh;
+    gap: 5px;
+    box-shadow: #041C4D;
+    border-radius: 20px;
+    padding: 10PX;
+    color: white;
+    background-color: #babbbc;
+}
+
+#score-lives-cont {
+    width: 2%;
+    border-radius: 20px;
+    padding: 20px;
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+#game-container {
+    width: 98%;
+    border-radius: 20px;
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    position: relative;
+    /* box-shadow: #041C4D; */
+}
