@@ -18,6 +18,7 @@ Ocean Rush is a catching object game where the player catches fish to earn point
 
 ## Screenshots
 
+![alt text](image.png)
 
 ## Technologies
 1. HTML

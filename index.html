@@ -4,25 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ocean Rush🐳</title>
+    <title>Ocean Rush 🐳</title>
+
     <link rel="stylesheet" href="./css/style.css">
     <script defer src="./js/app.js"></script>
 </head>
 
 <body>
+
     <div id="container">
+
         <div id="score-lives-cont">
-            <p>Score:</p>
-            <p>Lives: <span id="lives">🐋🐡🐠</span></p>
+            <p id="score">Score: 0</p>
+            <p id="lives">Lives: 🐋🐡🐠</p>
         </div>
 
         <div id="game-container">
-            <p class="falling-object">🐠</p>
-            <p class="falling-object">🐠</p>
-            <p class="falling-object">🐠</p>
-            <p id="net-object">🎣</p>
+            <p id="falling-objects"></p>
+            <p id="net-object">🖐🏻</p>
         </div>
+
+        <div id="start-screen" class="overlay">
+            <h1>🌊 Ocean Rush 🌊</h1>
+            <p>Catch the fish and avoid the sharks!</p>
+            <button id="start-btn">Start Game</button>
+        </div>
+
+        <div id="game-over-screen" class="overlay hidden">
+            <h1>Game Over!</h1>
+            <p>Your Score</p>
+            <h2 id="final-score">0</h2>
+            <button id="play-again-btn">Play Again</button>
+        </div>
+
     </div>
+
 </body>
 
 </html>
