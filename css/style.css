@@ -59,7 +59,7 @@ body {
 }
 
 #net-object {
-    font-size: 42px;
+    font-size: 65px;
     user-select: none;
     pointer-events: none;
     filter: drop-shadow(0 0 12px #00fff5);
