@@ -142,7 +142,7 @@ function handleCatching(item, fall) {
         // check if catching a bomb, minus lives (pop lives out of lives array) and if lives array is empty calls gameOver function
         if (item.textContent === bomb) {
             lives.pop()
-            livesElement.textContent = `Lives: ${lives}`
+            livesElement.textContent = `Lives: ${lives.join(' ')}`
 
             if (lives.length === 0) return gameOver()
 
