@@ -79,11 +79,15 @@ function startGame() {
 }
 
 function fallingObjects() {
-    createObject(Math.random() < 0.7
-        ? fishTypes[Math.floor(Math.random() * fishTypes.length)]
-        : bomb
-    )
+    let object
 
+    if (Math.random() < 0.7) {
+        object = fishTypes[Math.floor(Math.random() * fishTypes.length)]
+    } else {
+        object = bomb
+    }
+
+    createObject(object)
 }
 
 function createObject(type) {
