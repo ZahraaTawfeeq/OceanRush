@@ -48,7 +48,7 @@ function init() {
     gameRunning = true
 
     scoreElement.textContent = `Score: ${score}`
-    livesElement.textContent = `Lives: ${lives}`
+    livesElement.textContent = `Lives: ${lives.join(' ')}`
 
     // save the catcherMovement to be executed every 16ms to movementInterval
     movementInterval = setInterval(catcherMovement, 16)
