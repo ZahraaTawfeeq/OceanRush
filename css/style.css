@@ -43,7 +43,7 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: 20px;
-    background-image: url("../images/background.jpg");
+    background-image: url("../images/back.png");
     background-size: cover;
     background-position: center;
     border: 4px solid #062b66;
