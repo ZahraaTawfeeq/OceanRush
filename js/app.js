@@ -80,13 +80,13 @@ function startGame() {
 
 function fallingObjects() {
     let object
-
+    // this generates a num between 0.0 and 1.0 giving it 70% chance for fish and 30% for bomb to fall
     if (Math.random() < 0.7) {
         object = fishTypes[Math.floor(Math.random() * fishTypes.length)]
     } else {
         object = bomb
     }
-
+    // calling the create object and assigning the object (either bomb or fish) as param
     createObject(object)
 }
 
