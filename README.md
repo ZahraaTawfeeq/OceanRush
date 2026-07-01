@@ -28,6 +28,7 @@ Ocean Rush is a catching object game where the player catches fish to earn point
 ## Future Enhancements
 - Add sounds and effects.
 - Add multiple difficulty levels.
+- Add Responsive design for different screens (tablets, mobile phones).
 - Save and display the highest score.
 - Add a timer and require the player to catch a certain number of fish before time runs out.
 - Add a "Continue" feature that lets the player resume from where they lost.
