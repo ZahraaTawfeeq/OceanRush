@@ -29,7 +29,7 @@ let fallIntervals = []
 
 /*---------------------------- Functions ----------------------------*/
 function init() {
-    // reset all values 
+    // Stop all previous game intervals and clear old objects    
     clearInterval(movementInterval)
     clearInterval(objectInterval)
 
@@ -50,7 +50,7 @@ function init() {
     scoreElement.textContent = `Score: ${score}`
     livesElement.textContent = `Lives: ${lives.join(' ')}`
 
-    // save the catcherMovement to be executed every 16ms to movementInterval
+    // Move the catcher every 16 ms
     movementInterval = setInterval(catcherMovement, 16)
 
     startGame()
@@ -59,12 +59,12 @@ function init() {
 function catcherMovement() {
     if (!gameRunning) return
 
-    // if left key clicked move the catcher 5px to the left
+    // Move the catcher left while the left key is pressed
     if (keys.Left) catcher -= 5
-    // if right key clicked move the catcher 5px to the right
+    // Move the catcher right while the right key is pressed
     if (keys.Right) catcher += 5
 
-    // stops catcher from going out of the container
+    // Stop the catcher from moving outside the game area
     if (catcher < 275) catcher = 276
     if (catcher > 925) catcher = 926
 
@@ -74,38 +74,39 @@ function catcherMovement() {
 function startGame() {
     fallingObjects()
 
-    // assigns the fallingObjects to be executed every 1.5s to objectInterval
+    // Create a new falling object every 1.5 seconds
     objectInterval = setInterval(fallingObjects, 1500)
 }
 
 function fallingObjects() {
     let object
-    // this generates a num between 0.0 and 1.0 giving it 70% chance for fish and 30% for bomb to fall
+    // 70% chance to create a fish, 30% chance to create a bomb
     if (Math.random() < 0.7) {
         object = fishTypes[Math.floor(Math.random() * fishTypes.length)]
     } else {
         object = bomb
     }
-    // calling the create object and assigning the object (either bomb or fish) as param
+    // Create the selected object
     createObject(object)
 }
 
 function createObject(type) {
-    // creates span to add objects in html
+    // Create a new span element for the falling object
     const item = document.createElement('span')
     item.textContent = type
     item.style.position = 'absolute'
     item.style.top = '0px'
     item.style.left = Math.floor(Math.random() * 650) + 'px'
 
-    // adds the span to html using AppendChild (Add span to the <p id="falling-objects"></p>)
+    // Add the object to the game area
     fallingObjectsElement.appendChild(item)
 
     let y = 0
 
+    // Update the object's position every 25 ms
     const fall = setInterval(() => {
 
-        // if game is not running stop objects from falling
+        // Stop this object if the game has ended
         if (!gameRunning) {
             item.remove()
             clearInterval(fall)
@@ -115,35 +116,34 @@ function createObject(type) {
         y += 3
         item.style.top = `${y}px`
 
-        // handleCatching function called to catch the fallen object -item- and its place after falling -fall-
+        // Check whether the catcher has caught the object
         handleCatching(item, fall)
 
-        // if fallen object falls over 600px vertically (does not appear in screen) remove it and stop its falling
+        // Remove the object after it leaves the game area
         if (y > 600) {
             item.remove()
             clearInterval(fall)
         }
 
-        // 25 is falling speed, higher number will make it slow, lower number will be faster
     }, 25)
 
-    // add each fallen item into fallIntervals array
+    // Store the interval so it can be stopped later
     fallIntervals.push(fall)
 }
 
 function handleCatching(item, fall) {
-    // get catcher and fallenObjects location using .getBoundingClientRect()
+    // Get the positions of the object and the catcher
     const itemRect = item.getBoundingClientRect()
     const catcherRect = catcherElement.getBoundingClientRect()
 
-    // checking if the catcher and item is near each other 
+    // Check if the object and catcher overlap
     if (
         itemRect.left < catcherRect.right &&
         itemRect.right > catcherRect.left &&
         itemRect.top < catcherRect.bottom &&
         itemRect.bottom > catcherRect.top
     ) {
-        // check if catching a bomb, minus lives (pop lives out of lives array) and if lives array is empty calls gameOver function
+        // Lose a life if a bomb is caught
         if (item.textContent === bomb) {
             lives.pop()
             livesElement.textContent = `Lives: ${lives.join(' ')}`
@@ -151,19 +151,19 @@ function handleCatching(item, fall) {
             if (lives.length === 0) return gameOver()
 
         } else {
-            // if not bomb add 10 points in score, update score and if score is 150 calls winGame function
+            // Increase the score and check for a win
             score += 10
             scoreElement.textContent = `Score: ${score}`
 
             if (score >= 150) return winGame()
         }
-        // otherwise remove the fallen object and delete its falling feature
+        // Remove the caught object and stop its falling interval
         item.remove()
         clearInterval(fall)
     }
 }
 
-// if player wins reset all and show game winning screen
+// Stop the game and show the win screen
 function winGame() {
     gameRunning = false
 
@@ -175,12 +175,12 @@ function winGame() {
 
     finalScoreElement.textContent = score
 
-    // remove hidden from win screen class to show, and hide the game over screen
+    // Show the win screen and hide the game over screen
     winScreenElement.classList.remove('hidden')
     gameOverElement.classList.add('hidden')
 }
 
-// if player loses reset all and show the game over screen
+// Stop the game and show the game over screen
 function gameOver() {
     gameRunning = false
 
@@ -192,19 +192,19 @@ function gameOver() {
 
     finalScoreElement.textContent = score
 
-    // remove hidden from game over class to show, and hide the win game screen
+    // Show the game over screen and hide the win screen
     gameOverElement.classList.remove('hidden')
     winScreenElement.classList.add('hidden')
 }
 
 /*-------------------------------- Evennt Listeners ----------------------------*/
-// using window property to handle if a, d, left arrow, right arrow is pressed (Keydown) the keys left and right will be true and movement will start
+// Start moving when a movement key is pressed
 window.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'a') keys.Left = true
     if (e.key === 'ArrowRight' || e.key === 'd') keys.Right = true
 })
 
-// if the keyup means player stopped pressing the keys (left and right) be false and movement stops
+// Stop moving when the movement key is released
 window.addEventListener('keyup', (e) => {
     if (e.key === 'ArrowLeft' || e.key === 'a') keys.Left = false
     if (e.key === 'ArrowRight' || e.key === 'd') keys.Right = false
@@ -213,5 +213,5 @@ window.addEventListener('keyup', (e) => {
 // Start btn event listener
 startBtn.addEventListener('click', init)
 
-// loop each play again btns from game over and winning screen
+// Restart the game when any "Play Again" button is clicked
 playAgainBtns.forEach(btn => btn.addEventListener('click', init))
